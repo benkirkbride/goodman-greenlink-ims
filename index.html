@@ -14,11 +14,11 @@
 
     :root {
       /* Refreshed Goodman Palette */
-      --goodman-green: #58B946;      /* Primary Goodman Green */
-      --neon-green: #96FA64;         /* Highlight Green */
-      --pale-green: #E5FED8;         /* Section Tint */
-      --ink: #140C39;                /* Primary Ink */
-      --grey-ink: #4F486A;           /* Supporting Ink */
+      --goodman-green: #58B946;
+      --neon-green: #96FA64;
+      --pale-green: #E5FED8;
+      --ink: #140C39;
+      --grey-ink: #4F486A;
       --white: #FFFFFF;
       --dark-purple: #412E9C;
       --neon-purple: #6E50FF;
@@ -71,15 +71,34 @@
 
     /* Hero */
     .hero {
-      background: linear-gradient(135deg, var(--goodman-green) 0%, #4AAA30 100%);
+      position: relative;
+      background: linear-gradient(135deg, rgba(88, 185, 70, 0.7) 0%, rgba(74, 170, 48, 0.7) 100%), url('data-centre-hero.jpg') center/cover no-repeat;
       color: var(--white);
-      padding: 80px 40px;
+      padding: 120px 40px;
       text-align: center;
+      overflow: hidden;
+    }
+
+    /* Hero background zoom animation */
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: inherit;
+      z-index: -1;
+      animation: zoomBackground 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes zoomBackground {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
     }
 
     .hero-content {
       max-width: 900px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     .hero h1 {
@@ -88,12 +107,35 @@
       font-weight: 700;
     }
 
+    .hero h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
     .hero p {
       font-size: 20px;
       opacity: 0.95;
       max-width: 700px;
       margin: 0 auto;
     }
+
+    /* Hero text animations */
+    @keyframes heroFadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-content h1,
+    .hero-content h2,
+    .hero-content p {
+      opacity: 0;
+      animation: heroFadeInUp 1s ease-out forwards;
+    }
+
+    .hero-content h1 { animation-delay: 0.3s; }
+    .hero-content h2 { animation-delay: 0.6s; }
+    .hero-content p { animation-delay: 0.9s; }
 
     /* Content Container */
     .container {
@@ -149,34 +191,12 @@
       font-size: 32px;
     }
 
-    .card.safety .card-icon {
-      background-color: rgba(88, 185, 70, 0.12);
-      color: var(--goodman-green);
-    }
+    .card.safety .card-icon { background-color: rgba(88, 185, 70, 0.12); color: var(--goodman-green); }
+    .card.quality .card-icon { background-color: rgba(110, 80, 255, 0.12); color: var(--neon-purple); }
+    .card.environment .card-icon { background-color: rgba(150, 250, 100, 0.15); color: #78C840; }
 
-    .card.quality .card-icon {
-      background-color: rgba(110, 80, 255, 0.12);
-      color: var(--neon-purple);
-    }
-
-    .card.environment .card-icon {
-      background-color: rgba(150, 250, 100, 0.15);
-      color: #78C840;
-    }
-
-    .card h3 {
-      font-size: 26px;
-      margin-bottom: 15px;
-      color: var(--ink);
-      font-weight: 700;
-    }
-
-    .card p {
-      color: var(--grey-ink);
-      font-size: 16px;
-      margin-bottom: 20px;
-      line-height: 1.7;
-    }
+    .card h3 { font-size: 26px; margin-bottom: 15px; color: var(--ink); font-weight: 700; }
+    .card p { color: var(--grey-ink); font-size: 16px; margin-bottom: 20px; line-height: 1.7; }
 
     .card-link {
       color: var(--goodman-green);
@@ -205,12 +225,7 @@
       border-radius: 12px;
     }
 
-    .quick-access h2 {
-      font-size: 32px;
-      margin-bottom: 30px;
-      color: var(--ink);
-      font-weight: 700;
-    }
+    .quick-access h2 { font-size: 32px; margin-bottom: 30px; color: var(--ink); font-weight: 700; }
 
     .quick-links-grid {
       display: grid;
@@ -232,21 +247,11 @@
       animation: fadeInUp 0.6s ease-out;
     }
 
-    .quick-link-item:hover {
-      transform: translateX(5px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .quick-link-icon {
-      font-size: 24px;
-      color: var(--goodman-green);
-    }
+    .quick-link-item:hover { transform: translateX(5px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .quick-link-icon { font-size: 24px; color: var(--goodman-green); }
 
     /* Resources */
-    .resources-section {
-      margin-top: 60px;
-    }
-
+    .resources-section { margin-top: 60px; }
     .resources-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -262,23 +267,9 @@
       animation: fadeInUp 0.6s ease-out;
     }
 
-    .resource-item:hover {
-      border-color: var(--goodman-green);
-    }
-
-    .resource-item h4 {
-      color: var(--ink);
-      font-size: 20px;
-      margin-bottom: 10px;
-      font-weight: 700;
-    }
-
-    .resource-item p {
-      color: var(--grey-ink);
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
-
+    .resource-item:hover { border-color: var(--goodman-green); }
+    .resource-item h4 { color: var(--ink); font-size: 20px; margin-bottom: 10px; font-weight: 700; }
+    .resource-item p { color: var(--grey-ink); font-size: 14px; margin-bottom: 15px; }
     .resource-btn {
       background-color: var(--goodman-green);
       color: var(--white);
@@ -289,48 +280,40 @@
       font-weight: 600;
       transition: background-color 0.3s;
     }
-
-    .resource-btn:hover {
-      background-color: #4AAA30;
-    }
+    .resource-btn:hover { background-color: #4AAA30; }
 
     /* Footer */
     .footer {
       background-color: var(--ink);
       color: var(--white);
-      padding: 50px 40px 30px;
-      margin-top: 80px;
+      padding: 50px 20px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .footer-section h4 {
-      color: var(--goodman-green);
-      margin-bottom: 15px;
-      font-size: 18px;
-      font-weight: 700;
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      width: 100%;
+      max-width: 1200px;
+      text-align: center;
+      margin-bottom: 30px;
     }
 
-    .footer-section ul {
-      list-style: none;
-    }
-
-    .footer-section ul li {
-      margin-bottom: 10px;
-    }
-
-    .footer-section a {
-      color: #B0B0B0;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .footer-section a:hover {
-      color: var(--goodman-green);
-    }
+    .footer-section h4 { color: var(--goodman-green); margin-bottom: 15px; font-size: 18px; font-weight: 700; }
+    .footer-section ul { list-style: none; padding: 0; }
+    .footer-section ul li { margin-bottom: 10px; }
+    .footer-section a { color: #B0B0B0; text-decoration: none; transition: color 0.3s; }
+    .footer-section a:hover { color: var(--goodman-green); }
 
     .footer-bottom {
       text-align: center;
-      padding-top: 30px;
       border-top: 1px solid #333;
+      padding-top: 20px;
+      width: 100%;
+      max-width: 1200px;
       color: #B0B0B0;
     }
 
@@ -339,10 +322,12 @@
       .header-content { flex-direction: column; gap: 20px; }
       .nav-links { flex-direction: column; text-align: center; gap: 15px; }
       .hero h1 { font-size: 32px; }
+      .hero h2 { font-size: 24px; }
       .hero p { font-size: 16px; }
       .cards-grid { grid-template-columns: 1fr; }
       .quick-links-grid { grid-template-columns: 1fr; }
       .resources-grid { grid-template-columns: 1fr; }
+      .footer-content { grid-template-columns: 1fr; gap: 25px; }
     }
   </style>
 </head>
@@ -420,38 +405,14 @@
     <div class="quick-access">
       <h2>Quick Access</h2>
       <div class="quick-links-grid">
-        <a href="#" class="quick-link-item">
-          <span class="quick-link-icon">📋</span>
-          <span class="quick-link-text">Daily Reports</span>
-        </a>
-        <a href="#" class="quick-link-item">
-          <span class="quick-link-icon">📊</span>
-          <span class="quick-link-text">Dashboard & KPIs</span>
-        </a>
-        <a href="#" class="quick-link-item">
-          <span class="quick-link-icon">📖</span>
-          <span class="quick-link-text">Procedures & SOPs</span>
-        </a>
-        <a href="#" class="quick-link-item">
-          <span class="quick-link-icon">🎓</span>
-          <span class="quick-link-text">Training Portal</span>
-        </a>
-        <a href="#" class="quick-link-item">
-          <span class="quick-link-icon">📁</span>
-          <span class="quick-link-text">Document Library</span>
-        </a>
-        <a href="#" class="quick-link-item">
-          <span class="quick-link-icon">👥</span>
-          <span class="quick-link-text">Emergency Contacts</span>
-        </a>
-        <a href="#" class="quick-link-item">
-          <span class="quick-link-icon">⚙️</span>
-          <span class="quick-link-text">System Settings</span>
-        </a>
-        <a href="#" class="quick-link-item">
-          <span class="quick-link-icon">💬</span>
-          <span class="quick-link-text">Support & Feedback</span>
-        </a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">📋</span><span class="quick-link-text">Daily Reports</span></a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">📊</span><span class="quick-link-text">Dashboard & KPIs</span></a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">📖</span><span class="quick-link-text">Procedures & SOPs</span></a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">🎓</span><span class="quick-link-text">Training Portal</span></a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">📁</span><span class="quick-link-text">Document Library</span></a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">👥</span><span class="quick-link-text">Emergency Contacts</span></a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">⚙️</span><span class="quick-link-text">System Settings</span></a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">💬</span><span class="quick-link-text">Support & Feedback</span></a>
       </div>
     </div>
 
@@ -474,131 +435,4 @@
           <p>Download editable forms, checklists, and templates for site documentation and reporting.</p>
           <a href="#" class="resource-btn">Browse Templates</a>
         </div>
-        <div class="resource-item">
-          <h4>Training Materials</h4>
-          <p>Access induction materials, toolbox talks, and competency assessment resources.</p>
-          <a href="#" class="resource-btn">View Materials</a>
-        </div>
-        <div class="resource-item">
-          <h4>Project Documentation</h4>
-          <p>Project-specific HSEQ plans, risk assessments, and interface management documents.</p>
-          <a href="#" class="resource-btn">Access Projects</a>
-        </div>
-        <div class="resource-item">
-          <h4>Audit & Inspection</h4>
-          <p>Audit schedules, inspection checklists, and verification tools for compliance monitoring.</p>
-          <a href="#" class="resource-btn">View Tools</a>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <!-- Footer -->
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-section">
-      <h4>About Goodman</h4>
-      <ul>
-        <li><a href="#">Company Overview</a></li>
-        <li><a href="#">Our Projects</a></li>
-        <li><a href="#">Sustainability</a></li>
-        <li><a href="#">Careers</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h4>HSEQ Systems</h4>
-      <ul>
-        <li><a href="#">Safety Management</a></li>
-        <li><a href="#">Quality Assurance</a></li>
-        <li><a href="#">Environmental</a></li>
-        <li><a href="#">Compliance</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h4>Support</h4>
-      <ul>
-        <li><a href="#">Help Centre</a></li>
-        <li><a href="#">Contact HSEQ Team</a></li>
-        <li><a href="#">System Updates</a></li>
-        <li><a href="#">Feedback</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h4>Resources</h4>
-      <ul>
-        <li><a href="#">Document Library</a></li>
-        <li><a href="#">Training Portal</a></li>
-        <li><a href="#">FAQs</a></li>
-        <li><a href="#">Legislative Updates</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2025 Goodman Group. All rights reserved. | Greenlink Integrated Management System</p>
-  </div>
-</footer>
-
-<style>
-/* Footer Styling */
-.footer {
-    background-color: var(--ink);
-    color: var(--white);
-    padding: 50px 20px 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* centers the content horizontally */
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 40px;
-    width: 100%;
-    max-width: 1200px;
-    text-align: center; /* centers text inside each section */
-    margin-bottom: 30px;
-}
-
-.footer-section h4 {
-    color: var(--goodman-green);
-    margin-bottom: 15px;
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.footer-section ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-section ul li {
-    margin-bottom: 10px;
-}
-
-.footer-section a {
-    color: #B0B0B0;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.footer-section a:hover {
-    color: var(--goodman-green);
-}
-
-.footer-bottom {
-    text-align: center;
-    border-top: 1px solid #333;
-    padding-top: 20px;
-    width: 100%;
-    max-width: 1200px;
-    color: #B0B0B0;
-}
-
-/* Responsive Footer */
-@media (max-width: 768px) {
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-}
-</style>
+        <div
