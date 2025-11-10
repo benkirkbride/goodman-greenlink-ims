@@ -1,0 +1,153 @@
+/* --------------------------------------
+   GOODMAN DIGITAL BRAND THEME
+   Typography: Founders Grotesk (fallback: Helvetica, Arial, sans-serif)
+   -------------------------------------- */
+
+/* === Font === */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&display=swap'); 
+/* Substitute for Founders Grotesk — similar geometric sans for web use */
+
+:root {
+  /* --- Core Palette --- */
+  --goodman-green: #58B946;
+  --pale-green: #E5FED8;
+  --neon-green: #96FA64;
+  --tint-neon-green: #F1FEEB;
+
+  --ink: #140C39;
+  --grey-ink: #4F486A;
+  --tint-ink: #F1F1F3;
+
+  --dark-purple: #412E9C;
+  --neon-purple: #6E50FF;
+  --pale-purple: #DBD3FF;
+  --tint-neon-purple: #F5F4FF;
+
+  --white: #FFFFFF;
+
+  /* --- Spacing + Shadow --- */
+  --radius: 12px;
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --transition: all 0.25s ease-in-out;
+}
+
+/* === Global Reset === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Archivo', Helvetica, Arial, sans-serif;
+  background-color: var(--white);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* === Layout & Sections === */
+section {
+  padding: 80px 8%;
+}
+
+section.alt-bg {
+  background-color: var(--tint-neon-green);
+}
+
+/* === Headings === */
+h1, h2, h3 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+  color: var(--dark-purple);
+}
+
+/* === Text === */
+p {
+  margin-bottom: 1rem;
+  color: var(--grey-ink);
+}
+
+/* === Buttons === */
+.button,
+button {
+  background-color: var(--goodman-green);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.button:hover {
+  background-color: var(--neon-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* === Cards === */
+.card {
+  background-color: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  padding: 24px;
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* === Navigation === */
+nav {
+  background-color: var(--ink);
+  color: var(--white);
+  padding: 1rem 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav a {
+  color: var(--white);
+  text-decoration: none;
+  margin-left: 1.5rem;
+  transition: var(--transition);
+}
+
+nav a:hover {
+  color: var(--neon-green);
+}
+
+/* === Links === */
+a {
+  color: var(--dark-purple);
+  text-decoration: underline;
+}
+
+a:hover {
+  color: var(--neon-green);
+}
+
+/* === Footer === */
+footer {
+  background-color: var(--ink);
+  color: var(--tint-ink);
+  padding: 2rem 8%;
+  text-align: center;
+  font-size: 0.9rem;
+}
