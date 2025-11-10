@@ -13,15 +13,15 @@
     }
 
     :root {
-      /* Refreshed Goodman Palette */
-      --goodman-green: #58B946;
-      --neon-green: #96FA64;
-      --pale-green: #E5FED8;
-      --ink: #140C39;
-      --grey-ink: #4F486A;
+      --goodman-green: #58B946;      
+      --neon-green: #96FA64;         
+      --pale-green: #E5FED8;         
+      --ink: #140C39;                
+      --grey-ink: #4F486A;           
       --white: #FFFFFF;
       --dark-purple: #412E9C;
       --neon-purple: #6E50FF;
+      --security-blue: #1E3A8A;
     }
 
     body {
@@ -71,34 +71,31 @@
 
     /* Hero */
     .hero {
-      position: relative;
-      background: linear-gradient(135deg, rgba(88, 185, 70, 0.7) 0%, rgba(74, 170, 48, 0.7) 100%), url('data-centre-hero.jpg') center/cover no-repeat;
+      background: linear-gradient(135deg, var(--goodman-green) 0%, #4AAA30 100%);
       color: var(--white);
-      padding: 120px 40px;
+      padding: 80px 40px;
       text-align: center;
-      overflow: hidden;
+      background-image: url('data-centre-hero.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
     }
 
-    /* Hero background zoom animation */
-    .hero::before {
+    .hero::after {
       content: "";
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: inherit;
-      z-index: -1;
-      animation: zoomBackground 20s ease-in-out infinite alternate;
-    }
-
-    @keyframes zoomBackground {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.05); }
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(20, 12, 57, 0.5); /* semi-transparent overlay */
     }
 
     .hero-content {
-      max-width: 900px;
-      margin: 0 auto;
       position: relative;
       z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     .hero h1 {
@@ -110,7 +107,7 @@
     .hero h2 {
       font-size: 32px;
       margin-bottom: 20px;
-      font-weight: 600;
+      font-weight: 500;
     }
 
     .hero p {
@@ -120,24 +117,7 @@
       margin: 0 auto;
     }
 
-    /* Hero text animations */
-    @keyframes heroFadeInUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-content h1,
-    .hero-content h2,
-    .hero-content p {
-      opacity: 0;
-      animation: heroFadeInUp 1s ease-out forwards;
-    }
-
-    .hero-content h1 { animation-delay: 0.3s; }
-    .hero-content h2 { animation-delay: 0.6s; }
-    .hero-content p { animation-delay: 0.9s; }
-
-    /* Content Container */
+    /* Container */
     .container {
       max-width: 1400px;
       margin: 0 auto;
@@ -179,6 +159,7 @@
     .card.safety { border-top-color: var(--goodman-green); }
     .card.quality { border-top-color: var(--neon-purple); }
     .card.environment { border-top-color: var(--neon-green); }
+    .card.security { border-top-color: var(--security-blue); }
 
     .card-icon {
       width: 70px;
@@ -191,12 +172,36 @@
       font-size: 32px;
     }
 
-    .card.safety .card-icon { background-color: rgba(88, 185, 70, 0.12); color: var(--goodman-green); }
-    .card.quality .card-icon { background-color: rgba(110, 80, 255, 0.12); color: var(--neon-purple); }
-    .card.environment .card-icon { background-color: rgba(150, 250, 100, 0.15); color: #78C840; }
+    .card.safety .card-icon {
+      background-color: rgba(88, 185, 70, 0.12);
+      color: var(--goodman-green);
+    }
+    .card.quality .card-icon {
+      background-color: rgba(110, 80, 255, 0.12);
+      color: var(--neon-purple);
+    }
+    .card.environment .card-icon {
+      background-color: rgba(150, 250, 100, 0.15);
+      color: #78C840;
+    }
+    .card.security .card-icon {
+      background-color: rgba(30, 58, 138, 0.12);
+      color: var(--security-blue);
+    }
 
-    .card h3 { font-size: 26px; margin-bottom: 15px; color: var(--ink); font-weight: 700; }
-    .card p { color: var(--grey-ink); font-size: 16px; margin-bottom: 20px; line-height: 1.7; }
+    .card h3 {
+      font-size: 26px;
+      margin-bottom: 15px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .card p {
+      color: var(--grey-ink);
+      font-size: 16px;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
 
     .card-link {
       color: var(--goodman-green);
@@ -207,10 +212,9 @@
       gap: 8px;
       transition: gap 0.3s;
     }
-
-    .card-link:hover { gap: 12px; }
     .card.quality .card-link { color: var(--neon-purple); }
     .card.environment .card-link { color: #78C840; }
+    .card.security .card-link { color: var(--security-blue); }
 
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
@@ -225,7 +229,12 @@
       border-radius: 12px;
     }
 
-    .quick-access h2 { font-size: 32px; margin-bottom: 30px; color: var(--ink); font-weight: 700; }
+    .quick-access h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: var(--ink);
+      font-weight: 700;
+    }
 
     .quick-links-grid {
       display: grid;
@@ -247,7 +256,11 @@
       animation: fadeInUp 0.6s ease-out;
     }
 
-    .quick-link-item:hover { transform: translateX(5px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .quick-link-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
     .quick-link-icon { font-size: 24px; color: var(--goodman-green); }
 
     /* Resources */
@@ -257,7 +270,6 @@
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 25px;
     }
-
     .resource-item {
       background: var(--white);
       border: 2px solid #E5E5E5;
@@ -266,10 +278,18 @@
       transition: border-color 0.3s;
       animation: fadeInUp 0.6s ease-out;
     }
-
     .resource-item:hover { border-color: var(--goodman-green); }
-    .resource-item h4 { color: var(--ink); font-size: 20px; margin-bottom: 10px; font-weight: 700; }
-    .resource-item p { color: var(--grey-ink); font-size: 14px; margin-bottom: 15px; }
+    .resource-item h4 {
+      color: var(--ink);
+      font-size: 20px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .resource-item p {
+      color: var(--grey-ink);
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
     .resource-btn {
       background-color: var(--goodman-green);
       color: var(--white);
@@ -345,6 +365,7 @@
           <li><a href="#safety">Safety</a></li>
           <li><a href="#quality">Quality</a></li>
           <li><a href="#environment">Environment</a></li>
+          <li><a href="#security">Security</a></li>
           <li><a href="#resources">Resources</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -352,7 +373,7 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero" id="home">
     <div class="hero-content">
       <h1>Greenlink</h1>
@@ -365,65 +386,68 @@
   <main class="container">
     <h2 class="section-title">Our Systems</h2>
 
-    <!-- Cards -->
     <div class="cards-grid">
+      <!-- Safety Card -->
       <div class="card safety" id="safety">
         <div class="card-icon">🛡️</div>
         <h3>Safety</h3>
         <p>Access comprehensive safety management plans, risk assessments, and incident reporting systems for all data centre projects.</p>
-        <a href="#" class="card-link">+ WHS Management Plans</a><br/>
-        <a href="#" class="card-link">+ Safety in Design</a><br/>
-        <a href="#" class="card-link">+ Incident Reporting</a><br/>
-        <a href="#" class="card-link">+ Risk Assessments</a><br/>
-        <a href="#" class="card-link">+ Contractor Management</a>
+        <a href="#" class="card-link">→ WHS Management Plans</a><br/>
+        <a href="#" class="card-link">→ Safety in Design</a><br/>
+        <a href="#" class="card-link">→ Incident Reporting</a><br/>
+        <a href="#" class="card-link">→ Risk Assessments</a><br/>
+        <a href="#" class="card-link">→ Contractor Management</a>
       </div>
 
+      <!-- Quality Card -->
       <div class="card quality" id="quality">
         <div class="card-icon">✓</div>
         <h3>Quality</h3>
         <p>Maintain excellence through quality assurance frameworks, inspection schedules, and compliance verification processes.</p>
-        <a href="#" class="card-link">+ Quality Management Plans</a><br/>
-        <a href="#" class="card-link">+ Inspection & Testing</a><br/>
-        <a href="#" class="card-link">+ Non-Conformance Reports</a><br/>
-        <a href="#" class="card-link">+ Document Control</a><br/>
-        <a href="#" class="card-link">+ Audit Schedules</a>
+        <a href="#" class="card-link">→ Quality Management Plans</a><br/>
+        <a href="#" class="card-link">→ Inspection & Testing</a><br/>
+        <a href="#" class="card-link">→ Non-Conformance Reports</a><br/>
+        <a href="#" class="card-link">→ Document Control</a><br/>
+        <a href="#" class="card-link">→ Audit Schedules</a>
       </div>
 
+      <!-- Environment Card -->
       <div class="card environment" id="environment">
         <div class="card-icon">🌱</div>
         <h3>Environment</h3>
         <p>Monitor environmental performance, sustainability initiatives, and compliance with environmental regulations across all sites.</p>
-        <a href="#" class="card-link">+ Environmental Plans</a><br/>
-        <a href="#" class="card-link">+ Sustainability Metrics</a><br/>
-        <a href="#" class="card-link">+ Waste Management</a><br/>
-        <a href="#" class="card-link">+ Energy Monitoring</a><br/>
-        <a href="#" class="card-link">+ Environmental Incidents</a>
+        <a href="#" class="card-link">→ Environmental Plans</a><br/>
+        <a href="#" class="card-link">→ Sustainability Metrics</a><br/>
+        <a href="#" class="card-link">→ Waste Management</a><br/>
+        <a href="#" class="card-link">→ Energy Monitoring</a><br/>
+        <a href="#" class="card-link">→ Environmental Incidents</a>
+      </div>
+
+      <!-- Security Card -->
+      <div class="card security" id="security">
+        <div class="card-icon">🔒</div>
+        <h3>Security</h3>
+        <p>Manage data centre security protocols, access control, monitoring systems, and compliance with security standards.</p>
+        <a href="#" class="card-link">→ Physical Security</a><br/>
+        <a href="#" class="card-link">→ Cybersecurity Policies</a><br/>
+        <a href="#" class="card-link">→ Access Control Logs</a><br/>
+        <a href="#" class="card-link">→ Surveillance & Monitoring</a><br/>
+        <a href="#" class="card-link">→ Incident Response</a>
       </div>
     </div>
 
-    <div class="card security" id="security">
-  <div class="card-icon">🔒</div>
-  <h3>Security</h3>
-  <p>Manage data centre security protocols, access control, monitoring systems, and compliance with security standards.</p>
-  <a href="#" class="card-link">→ Physical Security</a><br/>
-  <a href="#" class="card-link">→ Cybersecurity Policies</a><br/>
-  <a href="#" class="card-link">→ Access Control Logs</a><br/>
-  <a href="#" class="card-link">→ Surveillance & Monitoring</a><br/>
-  <a href="#" class="card-link">→ Incident Response</a>
-</div>
-    
-    <!-- Quick Access -->
+    <!-- Quick Access Section -->
     <div class="quick-access">
       <h2>Quick Access</h2>
       <div class="quick-links-grid">
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">📋</span><span class="quick-link-text">Daily Reports</span></a>
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">📊</span><span class="quick-link-text">Dashboard & KPIs</span></a>
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">📖</span><span class="quick-link-text">Procedures & SOPs</span></a>
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">🎓</span><span class="quick-link-text">Training Portal</span></a>
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">📁</span><span class="quick-link-text">Document Library</span></a>
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">👥</span><span class="quick-link-text">Emergency Contacts</span></a>
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">⚙️</span><span class="quick-link-text">System Settings</span></a>
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">💬</span><span class="quick-link-text">Support & Feedback</span></a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">📋</span>Daily Reports</a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">📊</span>Dashboard & KPIs</a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">📖</span>Procedures & SOPs</a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">🎓</span>Training Portal</a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">📁</span>Document Library</a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">👥</span>Emergency Contacts</a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">⚙️</span>System Settings</a>
+        <a href="#" class="quick-link-item"><span class="quick-link-icon">💬</span>Support & Feedback</a>
       </div>
     </div>
 
@@ -446,4 +470,68 @@
           <p>Download editable forms, checklists, and templates for site documentation and reporting.</p>
           <a href="#" class="resource-btn">Browse Templates</a>
         </div>
-        <div
+        <div class="resource-item">
+          <h4>Training Materials</h4>
+          <p>Access induction materials, toolbox talks, and competency assessment resources.</p>
+          <a href="#" class="resource-btn">View Materials</a>
+        </div>
+        <div class="resource-item">
+          <h4>Project Documentation</h4>
+          <p>Project-specific HSEQ plans, risk assessments, and interface management documents.</p>
+          <a href="#" class="resource-btn">Access Projects</a>
+        </div>
+        <div class="resource-item">
+          <h4>Audit & Inspection</h4>
+          <p>Audit schedules, inspection checklists, and verification tools for compliance monitoring.</p>
+          <a href="#" class="resource-btn">View Tools</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>About Goodman</h4>
+        <ul>
+          <li><a href="#">Company Overview</a></li>
+          <li><a href="#">Our Projects</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>HSEQ Systems</h4>
+        <ul>
+          <li><a href="#">Safety Management</a></li>
+          <li><a href="#">Quality Assurance</a></li>
+          <li><a href="#">Environmental</a></li>
+          <li><a href="#">Compliance</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Centre</a></li>
+          <li><a href="#">Contact HSEQ Team</a></li>
+          <li><a href="#">System Updates</a></li>
+          <li><a href="#">Feedback</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Document Library</a></li>
+          <li><a href="#">Training Portal</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Legislative Updates</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Goodman Group. All rights reserved. | Greenlink Integrated Management System</p>
+    </div>
+  </footer>
+</body>
+</html>
