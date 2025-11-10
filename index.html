@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Goodman Greenlink IMS</title>
 
-  <!-- Founders Grotesk is not web-hosted, so Archivo serves as a close digital substitute -->
+  <!-- Founders Grotesk substitute -->
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <style>
@@ -15,7 +15,6 @@
     --------------------------------*/
 
     :root {
-      /* --- Core Palette --- */
       --goodman-green: #58B946;
       --pale-green: #E5FED8;
       --neon-green: #96FA64;
@@ -29,7 +28,6 @@
       --tint-neon-purple: #F5F4FF;
       --white: #FFFFFF;
 
-      /* --- Spacing + Shadow --- */
       --radius: 12px;
       --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08);
       --transition: all 0.25s ease-in-out;
@@ -59,13 +57,13 @@
       align-items: center;
     }
 
-    nav .logo {
-      font-weight: 700;
-      font-size: 1.25rem;
-      letter-spacing: -0.02em;
+    nav .logo img {
+      height: 40px;
+      width: auto;
+      display: block;
     }
 
-    nav a {
+    nav .nav-links a {
       color: var(--white);
       text-decoration: none;
       margin-left: 1.5rem;
@@ -73,7 +71,7 @@
       transition: var(--transition);
     }
 
-    nav a:hover {
+    nav .nav-links a:hover {
       color: var(--neon-green);
     }
 
@@ -114,7 +112,7 @@
       box-shadow: var(--shadow-soft);
     }
 
-    /* --- Content Sections --- */
+    /* --- Sections --- */
     section {
       padding: 80px 8%;
     }
@@ -162,7 +160,10 @@
 <body>
 
   <nav>
-    <div class="logo">Goodman</div>
+    <div class="logo">
+      <!-- replace file path if stored elsewhere, e.g. /images/Goodman-Logo.svg -->
+      <img src="Goodman-Logo.png" alt="Goodman Logo" />
+    </div>
     <div class="nav-links">
       <a href="#home">Home</a>
       <a href="#about">About</a>
