@@ -1,522 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Goodman Greenlink - IMS Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     :root {
       --goodman-green: #58B946;
       --neon-green: #96FA64;
       --pale-green: #E5FED8;
       --ink: #140C39;
       --grey-ink: #4F486A;
-      --white: #FFFFFF;
       --dark-purple: #412E9C;
       --neon-purple: #6E50FF;
+      --white: #FFFFFF;
+      --radius: 12px;
+      --shadow-soft: 0 2px 8px rgba(0,0,0,0.08);
+      --transition: all 0.25s ease-in-out;
     }
 
-    body {
-      font-family: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-      color: var(--ink);
-      line-height: 1.6;
-      background-color: var(--white);
-    }
+    /* Global Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Archivo', Helvetica, Arial, sans-serif; background-color: var(--white); color: var(--ink); line-height:1.6; font-size:16px; }
 
-    /* Header */
-    .header {
-      background-color: var(--ink);
-      padding: 20px 0;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
+    /* Navigation */
+    nav { background-color: var(--ink); color: var(--white); padding: 1rem 8%; display:flex; justify-content:space-between; align-items:center; }
+    nav a { color: var(--white); text-decoration:none; margin-left:1.5rem; transition: var(--transition); }
+    nav a:hover { color: var(--neon-green); }
 
-    .header-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo-section img {
-      height: 62px;
-      width: auto;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 30px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--white);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: var(--neon-green);
-    }
-
-    /* Hero */
+    /* Hero Section with Parallax */
     .hero {
       position: relative;
-      background: url('datacentre-hero.jpg') center/cover no-repeat;
+      background: linear-gradient(rgba(20,12,57,0.55), rgba(20,12,57,0.55)), url('datacentre-hero.jpg') no-repeat center center/cover;
       color: var(--white);
-      padding: 120px 40px;
+      padding: 120px 8%;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.35);
-      z-index: 1;
-    }
+    .hero-content { position: relative; z-index:2; max-width:900px; }
+    .hero h1, .hero h2 { text-shadow:0 4px 15px rgba(0,0,0,0.5); }
+    .hero h1 { font-size:3rem; margin-bottom:1rem; }
+    .hero h2 { font-size:2rem; margin-bottom:1rem; color: var(--neon-green); }
+    .hero p { font-size:1.2rem; opacity:0.95; color: var(--white); text-shadow:0 2px 10px rgba(0,0,0,0.4); }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 30px;
-      border-radius: 12px;
-    }
-
-    .hero h1 {
-      font-size: 48px;
-      margin-bottom: 15px;
-      font-weight: 700;
-    }
-
-    .hero h2 {
-      font-size: 32px;
-      margin-bottom: 20px;
-      font-weight: 500;
-    }
-
-    .hero p {
-      font-size: 20px;
-      opacity: 0.95;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    /* Content Container */
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 60px 40px;
-    }
-
-    .section-title {
-      font-size: 36px;
-      color: var(--ink);
-      margin-bottom: 40px;
-      text-align: center;
-      font-weight: 700;
-    }
+    /* Section */
+    section { padding:80px 8%; }
+    h2.section-title { font-size:2rem; text-align:center; margin-bottom:40px; color: var(--ink); }
 
     /* Cards */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 30px;
-      margin-bottom: 60px;
-      align-items: stretch;
-    }
+    .cards-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:30px; margin-bottom:60px; }
+    .card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-soft); padding:24px; transition: var(--transition); border-top:5px solid var(--goodman-green); }
+    .card:hover { transform: translateY(-4px); }
 
-    .card {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      background: var(--white);
-      border-radius: 12px;
-      padding: 40px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      transition: transform 0.3s, box-shadow 0.3s;
-      border-top: 5px solid var(--goodman-green);
-      cursor: pointer;
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    }
+    .card h3 { font-size:1.5rem; margin-bottom:0.5rem; }
+    .card p { font-size:0.95rem; margin-bottom:1rem; color: var(--grey-ink); }
+    .card-link { display:block; text-decoration:none; font-weight:600; margin-bottom:4px; color: var(--goodman-green); }
+    .card-link:hover { color: var(--neon-green); }
 
     .card.safety { border-top-color: var(--goodman-green); }
     .card.quality { border-top-color: var(--neon-purple); }
     .card.environment { border-top-color: var(--neon-green); }
-    .card.security { border-top-color: #FF6B6B; }
+    .card.security { border-top-color: #1E3A8A; }
 
-    .card-icon {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 25px;
-      font-size: 32px;
-    }
-
-    .card.safety .card-icon { background-color: rgba(88, 185, 70, 0.12); color: var(--goodman-green); }
-    .card.quality .card-icon { background-color: rgba(110, 80, 255, 0.12); color: var(--neon-purple); }
-    .card.environment .card-icon { background-color: rgba(150, 250, 100, 0.15); color: #78C840; }
-    .card.security .card-icon { background-color: rgba(255, 107, 107, 0.12); color: #FF6B6B; }
-
-    .card h3 {
-      font-size: 26px;
-      margin-bottom: 15px;
-      color: var(--ink);
-      font-weight: 700;
-    }
-
-    .card p {
-      color: var(--grey-ink);
-      font-size: 16px;
-      margin-bottom: 20px;
-      line-height: 1.7;
-    }
-
-    .card-link {
-      color: var(--goodman-green);
-      text-decoration: none;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: gap 0.3s;
-    }
-
-    .card-link:hover { gap: 12px; }
-    .card.quality .card-link { color: var(--neon-purple); }
-    .card.environment .card-link { color: #78C840; }
-    .card.security .card-link { color: #FF6B6B; }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .card-icon { width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:15px; }
+    .card.safety .card-icon { background-color: rgba(88,185,70,0.12); color: var(--goodman-green); }
+    .card.quality .card-icon { background-color: rgba(110,80,255,0.12); color: var(--neon-purple); }
+    .card.environment .card-icon { background-color: rgba(150,250,100,0.15); color:#78C840; }
+    .card.security .card-icon { background-color: rgba(30,58,138,0.12); color:#1E3A8A; }
+    .card.security .card-link { color:#1E3A8A; }
 
     /* Quick Access */
-    .quick-access {
-      background-color: var(--pale-green);
-      padding: 50px 40px;
-      margin: 60px 0;
-      border-radius: 12px;
-    }
-
-    .quick-access h2 {
-      font-size: 32px;
-      margin-bottom: 30px;
-      color: var(--ink);
-      font-weight: 700;
-    }
-
-    .quick-links-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .quick-link-item {
-      background: var(--white);
-      padding: 25px;
-      border-radius: 8px;
-      text-decoration: none;
-      color: var(--ink);
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      transition: transform 0.3s, box-shadow 0.3s;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    .quick-link-item:hover {
-      transform: translateX(5px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .quick-link-icon { font-size: 24px; color: var(--goodman-green); }
+    .quick-access { background-color: var(--pale-green); padding:50px 40px; border-radius:12px; margin-bottom:60px; }
+    .quick-links-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:20px; }
+    .quick-link-item { display:flex; align-items:center; gap:10px; background: var(--white); padding:20px; border-radius: var(--radius); text-decoration:none; color: var(--ink); box-shadow: var(--shadow-soft); transition: var(--transition); }
+    .quick-link-item:hover { transform:translateY(-2px); box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+    .quick-link-icon { font-size:24px; }
 
     /* Resources */
-    .resources-section { margin-top: 60px; }
-
-    .resources-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-    }
-
-    .resource-item {
-      background: var(--white);
-      border: 2px solid #E5E5E5;
-      border-radius: 8px;
-      padding: 30px;
-      transition: border-color 0.3s;
-      animation: fadeInUp 0.6s ease-out;
-    }
-
+    .resources-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
+    .resource-item { background: var(--white); padding:24px; border-radius: var(--radius); border:1px solid #E5E5E5; transition: var(--transition); }
     .resource-item:hover { border-color: var(--goodman-green); }
-
-    .resource-item h4 {
-      color: var(--ink);
-      font-size: 20px;
-      margin-bottom: 10px;
-      font-weight: 700;
-    }
-
-    .resource-item p { color: var(--grey-ink); font-size: 14px; margin-bottom: 15px; }
-
-    .resource-btn {
-      background-color: var(--goodman-green);
-      color: var(--white);
-      padding: 10px 20px;
-      border-radius: 6px;
-      text-decoration: none;
-      display: inline-block;
-      font-weight: 600;
-      transition: background-color 0.3s;
-    }
-
-    .resource-btn:hover { background-color: #4AAA30; }
+    .resource-btn { display:inline-block; padding:10px 18px; border-radius: var(--radius); background: var(--goodman-green); color: var(--white); text-decoration:none; font-weight:600; margin-top:10px; }
+    .resource-btn:hover { background: var(--neon-green); }
 
     /* Footer */
-    .footer {
-      background-color: var(--ink);
-      color: var(--white);
-      padding: 50px 20px 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    footer { background-color: var(--ink); color: #B0B0B0; padding:2rem 8%; text-align:center; }
+    footer a { color:#B0B0B0; text-decoration:none; }
+    footer a:hover { color: var(--goodman-green); }
 
-    .footer-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 40px;
-      width: 100%;
-      max-width: 1200px;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .footer-section h4 { color: var(--goodman-green); margin-bottom: 15px; font-size: 18px; font-weight: 700; }
-    .footer-section ul { list-style: none; padding: 0; }
-    .footer-section ul li { margin-bottom: 10px; }
-    .footer-section a { color: #B0B0B0; text-decoration: none; transition: color 0.3s; }
-    .footer-section a:hover { color: var(--goodman-green); }
-    .footer-bottom { text-align: center; border-top: 1px solid #333; padding-top: 20px; width: 100%; max-width: 1200px; color: #B0B0B0; }
-
-    @media (max-width: 1200px) {
-      .cards-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 768px) {
-      .header-content { flex-direction: column; gap: 20px; }
-      .nav-links { flex-direction: column; text-align: center; gap: 15px; }
-      .hero h1 { font-size: 32px; }
-      .hero h2 { font-size: 24px; }
-      .hero p { font-size: 16px; }
-      .cards-grid { grid-template-columns: 1fr; }
-      .quick-links-grid { grid-template-columns: 1fr; }
-      .resources-grid { grid-template-columns: 1fr; }
-      .footer-content { grid-template-columns: 1fr; gap: 25px; }
+    /* Responsive */
+    @media(max-width:768px) {
+      nav { flex-direction:column; }
+      .cards-grid { grid-template-columns:1fr; }
+      .quick-links-grid { grid-template-columns:1fr; }
+      .resources-grid { grid-template-columns:1fr; }
+      .hero h1 { font-size:2rem; }
+      .hero h2 { font-size:1.5rem; }
+      .hero p { font-size:1rem; }
     }
   </style>
 </head>
-
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="header-content">
-      <div class="logo-section">
-        <img src="Goodman-Logo.png" alt="Goodman Logo">
-      </div>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#safety">Safety</a></li>
-          <li><a href="#quality">Quality</a></li>
-          <li><a href="#environment">Environment</a></li>
-          <li><a href="#security">Security</a></li>
-          <li><a href="#resources">Resources</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+  <!-- Navigation -->
+  <nav>
+    <div class="logo"><img src="Goodman-Logo.png" alt="Goodman Logo" height="50"></div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#safety">Safety</a>
+      <a href="#quality">Quality</a>
+      <a href="#environment">Environment</a>
+      <a href="#security">Security</a>
+      <a href="#resources">Resources</a>
     </div>
-  </header>
+  </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero" id="home">
     <div class="hero-content">
       <h1>Greenlink</h1>
       <h2>Integrated Management System</h2>
-      <p>The Goodman Greenlink IMS drives safe, sustainable, and high-quality outcomes across our global data centre network through a connected management framework.</p>
+      <p>Driving safe, sustainable, and high-quality outcomes across Goodman’s global data centre network.</p>
     </div>
   </section>
 
-  <!-- Main Content -->
-  <main class="container">
+  <!-- Cards -->
+  <section>
     <h2 class="section-title">Our Systems</h2>
-
-    <!-- Cards -->
     <div class="cards-grid">
       <div class="card safety" id="safety">
         <div class="card-icon">🛡️</div>
         <h3>Safety</h3>
-        <p>Access comprehensive safety management plans, risk assessments, and incident reporting systems for all data centre projects.</p>
-        <a href="#" class="card-link">→ WHS Management Plans</a><br/>
-        <a href="#" class="card-link">→ Safety in Design</a><br/>
-        <a href="#" class="card-link">→ Incident Reporting</a><br/>
-        <a href="#" class="card-link">→ Risk Assessments</a><br/>
-        <a href="#" class="card-link">→ Contractor Management</a>
+        <p>Access comprehensive safety management plans, risk assessments, and incident reporting systems.</p>
+        <a href="#" class="card-link">→ WHS Management Plans</a>
+        <a href="#" class="card-link">→ Safety in Design</a>
+        <a href="#" class="card-link">→ Incident Reporting</a>
       </div>
-
       <div class="card quality" id="quality">
         <div class="card-icon">✓</div>
         <h3>Quality</h3>
-        <p>Maintain excellence through quality assurance frameworks, inspection schedules, and compliance verification processes.</p>
-        <a href="#" class="card-link">→ Quality Management Plans</a><br/>
-        <a href="#" class="card-link">→ Inspection & Testing</a><br/>
-        <a href="#" class="card-link">→ Non-Conformance Reports</a><br/>
-        <a href="#" class="card-link">→ Document Control</a><br/>
-        <a href="#" class="card-link">→ Audit Schedules</a>
+        <p>Maintain excellence through quality assurance frameworks and compliance verification processes.</p>
+        <a href="#" class="card-link">→ Quality Management Plans</a>
+        <a href="#" class="card-link">→ Inspection & Testing</a>
+        <a href="#" class="card-link">→ Document Control</a>
       </div>
-
       <div class="card environment" id="environment">
         <div class="card-icon">🌱</div>
         <h3>Environment</h3>
-        <p>Monitor environmental performance, sustainability initiatives, and compliance with environmental regulations across all sites.</p>
-        <a href="#" class="card-link">→ Environmental Plans</a><br/>
-        <a href="#" class="card-link">→ Sustainability Metrics</a><br/>
-        <a href="#" class="card-link">→ Waste Management</a><br/>
-        <a href="#" class="card-link">→ Energy Monitoring</a><br/>
-        <a href="#" class="card-link">→ Environmental Incidents</a>
+        <p>Monitor environmental performance and compliance with regulations across all sites.</p>
+        <a href="#" class="card-link">→ Environmental Plans</a>
+        <a href="#" class="card-link">→ Sustainability Metrics</a>
+        <a href="#" class="card-link">→ Energy Monitoring</a>
       </div>
-
       <div class="card security" id="security">
         <div class="card-icon">🔒</div>
         <h3>Security</h3>
-        <p>Access site security protocols, CCTV monitoring, access control systems, and incident response procedures for all data centres.</p>
-        <a href="#" class="card-link">→ Security Plans</a><br/>
-        <a href="#" class="card-link">→ CCTV & Access Control</a><br/>
-        <a href="#" class="card-link">→ Incident Response</a><br/>
-        <a href="#" class="card-link">→ Contractor Security</a><br/>
-        <a href="#" class="card-link">→ Audits & Compliance</a>
+        <p>Manage physical and cyber security protocols for all data centre operations.</p>
+        <a href="#" class="card-link">→ Access Control</a>
+        <a href="#" class="card-link">→ CCTV & Monitoring</a>
+        <a href="#" class="card-link">→ Incident Response</a>
       </div>
     </div>
+  </section>
 
-    <!-- Quick Access -->
-    <div class="quick-access">
-      <h2>Quick Access</h2>
-      <div class="quick-links-grid">
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">📋</span> Daily Reports</a>
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">📊</span> Dashboard & KPIs</a>
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">📖</span> Procedures & SOPs</a>
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">🎓</span> Training Portal</a>
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">📁</span> Document Library</a>
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">👥</span> Emergency Contacts</a>
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">⚙️</span> System Settings</a>
-        <a href="#" class="quick-link-item"><span class="quick-link-icon">💬</span> Support & Feedback</a>
-      </div>
+  <!-- Quick Access -->
+  <section class="quick-access">
+    <h2>Quick Access</h2>
+    <div class="quick-links-grid">
+      <a href="#" class="quick-link-item"><span class="quick-link-icon">📋</span>Daily Reports</a>
+      <a href="#" class="quick-link-item"><span class="quick-link-icon">📊</span>Dashboard & KPIs</a>
+      <a href="#" class="quick-link-item"><span class="quick-link-icon">📖</span>Procedures & SOPs</a>
+      <a href="#" class="quick-link-item"><span class="quick-link-icon">🎓</span>Training Portal</a>
+      <a href="#" class="quick-link-item"><span class="quick-link-icon">📁</span>Document Library</a>
+      <a href="#" class="quick-link-item"><span class="quick-link-icon">👥</span>Emergency Contacts</a>
+      <a href="#" class="quick-link-item"><span class="quick-link-icon">⚙️</span>System Settings</a>
+      <a href="#" class="quick-link-item"><span class="quick-link-icon">💬</span>Support & Feedback</a>
     </div>
+  </section>
 
-    <!-- Resources Section -->
-    <div class="resources-section" id="resources">
-      <h2 class="section-title">Resources & Documents</h2>
-      <div class="resources-grid">
-        <div class="resource-item">
-          <h4>Legislative Requirements</h4>
-          <p>Access current Australian WHS legislation, environmental regulations, and compliance guidelines.</p>
-          <a href="#" class="resource-btn">View Documents</a>
-        </div>
-        <div class="resource-item">
-          <h4>Standards & Guidelines</h4>
-          <p>Industry standards, best practice guidelines, and Goodman-specific requirements for data centres.</p>
-          <a href="#" class="resource-btn">View Standards</a>
-        </div>
-        <div class="resource-item">
-          <h4>Forms & Templates</h4>
-          <p>Download editable forms, checklists, and templates for site documentation and reporting.</p>
-          <a href="#" class="resource-btn">Browse Templates</a>
-        </div>
-        <div class="resource-item">
-          <h4>Training Materials</h4>
-          <p>Access induction materials, toolbox talks, and competency assessment resources.</p>
-          <a href="#" class="resource-btn">View Materials</a>
-        </div>
-        <div class="resource-item">
-          <h4>Project Documentation</h4>
-          <p>Project-specific HSEQ plans, risk assessments, and interface management documents.</p>
-          <a href="#" class="resource-btn">Access Projects</a>
-        </div>
-        <div class="resource-item">
-          <h4>Audit & Inspection</h4>
-          <p>Audit schedules, inspection checklists, and verification tools for compliance monitoring.</p>
-          <a href="#" class="resource-btn">View Tools</a>
-        </div>
-      </div>
+  <!-- Resources -->
+  <section id="resources">
+    <h2 class="section-title">Resources & Documents</h2>
+    <div class="resources-grid">
+      <div class="resource-item"><h4>Legislative Requirements</h4><p>Access current Australian WHS legislation and compliance guidelines.</p><a href="#" class="resource-btn">View Documents</a></div>
+      <div class="resource-item"><h4>Standards & Guidelines</h4><p>Industry standards and Goodman-specific requirements.</p><a href="#" class="resource-btn">View Standards</a></div>
+      <div class="resource-item"><h4>Forms & Templates</h4><p>Download editable forms and templates for site documentation.</p><a href="#" class="resource-btn">Browse Templates</a></div>
+      <div class="resource-item"><h4>Training Materials</h4><p>Access induction materials, toolbox talks, and assessment resources.</p><a href="#" class="resource-btn">View Materials</a></div>
     </div>
-  </main>
+  </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h4>About Goodman</h4>
-        <ul>
-          <li><a href="#">Company Overview</a></li>
-          <li><a href="#">Our Projects</a></li>
-          <li><a href="#">Sustainability</a></li>
-          <li><a href="#">Careers</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h4>HSEQ Systems</h4>
-        <ul>
-          <li><a href="#">Safety Management</a></li>
-          <li><a href="#">Quality Assurance</a></li>
-          <li><a href="#">Environmental</a></li>
-          <li><a href="#">Compliance</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h4>Support</h4>
-        <ul>
-          <li><a href="#">Help Centre</a></li>
-          <li><a href="#">Contact HSEQ Team</a></li>
-          <li><a href="#">System Updates</a></li>
-          <li><a href="#">Feedback</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h4>Resources</h4>
-        <ul>
-          <li><a href="#">Document Library</a></li>
-          <li><a href="#">Training Portal</a></li>
-          <li><a href="#">FAQs</a></li>
-          <li><a href="#">Legislative Updates</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Goodman Group. All rights reserved. | Greenlink Integrated Management System</p>
-    </div>
+  <footer>
+    <p>&copy; 2025 Goodman Group. All rights reserved. | Greenlink IMS Portal</p>
   </footer>
 </body>
 </html>
