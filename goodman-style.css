@@ -111,6 +111,12 @@ button {
 .card:hover {
   transform: translateY(-4px);
 }
+.card.security { border-top-color: #1E3A8A; } /* Dark blue */
+.card.security .card-icon {
+  background-color: rgba(30, 58, 138, 0.12); /* light blue circle */
+  color: #1E3A8A; /* dark blue icon */
+}
+.card.security .card-link { color: #1E3A8A; }
 
 /* === Navigation === */
 nav {
