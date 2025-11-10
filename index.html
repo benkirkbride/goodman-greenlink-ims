@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Goodman Greenlink IMS</title>
 
-  <!-- Founders Grotesk substitute -->
+  <!-- Font: Founders Grotesk substitute -->
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&display=swap" rel="stylesheet" />
 
   <style>
     /* -------------------------------
-       GOODMAN DIGITAL STYLE THEME
-       Typography: Founders Grotesk (Archivo substitute)
+       GOODMAN DIGITAL STYLE
+       (applied to your original layout)
     --------------------------------*/
 
     :root {
@@ -37,6 +37,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      scroll-behavior: smooth;
     }
 
     body {
@@ -47,23 +48,21 @@
       font-size: 16px;
     }
 
-    /* --- Navigation --- */
-    nav {
+    header {
       background-color: var(--ink);
       color: var(--white);
-      padding: 1rem 8%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      padding: 1rem 8%;
     }
 
-    nav .logo img {
-      height: 40px;
+    header img {
+      height: 42px;
       width: auto;
-      display: block;
     }
 
-    nav .nav-links a {
+    nav a {
       color: var(--white);
       text-decoration: none;
       margin-left: 1.5rem;
@@ -71,28 +70,41 @@
       transition: var(--transition);
     }
 
-    nav .nav-links a:hover {
+    nav a:hover {
       color: var(--neon-green);
     }
 
-    /* --- Hero Section --- */
-    header.hero {
-      background: var(--pale-green);
-      padding: 100px 8%;
+    section {
+      padding: 100px 10%;
       text-align: center;
     }
 
-    header.hero h1 {
-      font-size: 3rem;
-      color: var(--ink);
-      margin-bottom: 0.75rem;
+    section:nth-child(even) {
+      background-color: var(--tint-neon-green);
     }
 
-    header.hero p {
-      font-size: 1.2rem;
+    h1, h2 {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: var(--dark-purple);
+      margin-bottom: 1rem;
+    }
+
+    p {
       color: var(--grey-ink);
       max-width: 700px;
-      margin: 0 auto 2rem;
+      margin: 0 auto 1.5rem;
+      font-size: 1.1rem;
     }
 
     .button {
@@ -112,89 +124,66 @@
       box-shadow: var(--shadow-soft);
     }
 
-    /* --- Sections --- */
-    section {
-      padding: 80px 8%;
-    }
-
-    section.alt-bg {
-      background-color: var(--tint-neon-green);
-    }
-
-    h2 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--dark-purple);
-      margin-bottom: 1rem;
-    }
-
-    p {
-      color: var(--grey-ink);
-      margin-bottom: 1rem;
-    }
-
-    .card {
-      background-color: var(--white);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-soft);
-      padding: 24px;
-      margin-bottom: 1.5rem;
-      transition: var(--transition);
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-    }
-
-    /* --- Footer --- */
     footer {
       background-color: var(--ink);
       color: var(--tint-ink);
-      padding: 2rem 8%;
       text-align: center;
+      padding: 2rem;
       font-size: 0.9rem;
     }
+
+    /* Smooth scrolling anchor fix */
+    a[href^="#"] {
+      cursor: pointer;
+    }
   </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", e => {
+          const href = anchor.getAttribute("href");
+          if (href.length > 1) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }
+        });
+      });
+    });
+  </script>
 </head>
 
 <body>
 
-  <nav>
-    <div class="logo">
-      <!-- replace file path if stored elsewhere, e.g. /images/Goodman-Logo.svg -->
-      <img src="Goodman-Logo.png" alt="Goodman Logo" />
-    </div>
-    <div class="nav-links">
+  <header>
+    <img src="Goodman-Logo.png" alt="Goodman Logo">
+    <nav>
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#ims">IMS</a>
       <a href="#contact">Contact</a>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
-  <header class="hero" id="home">
+  <section id="home">
     <h1>Goodman Greenlink IMS</h1>
     <p>Driving sustainable, safe and efficient delivery across Goodman’s global network through a connected management system.</p>
     <button class="button">Explore System</button>
-  </header>
+  </section>
 
   <section id="about">
     <h2>About the Greenlink IMS</h2>
-    <div class="card">
-      <p>The Goodman Greenlink Integrated Management System (IMS) provides a framework to support health, safety, environmental, and quality excellence across our developments, operations and partnerships.</p>
-      <p>It is designed to align with international standards, ensure continual improvement, and support our commitment to sustainable performance.</p>
-    </div>
+    <p>The Goodman Greenlink Integrated Management System (IMS) provides a framework to support health, safety, environmental, and quality excellence across our developments, operations, and partnerships.</p>
   </section>
 
-  <section id="ims" class="alt-bg">
+  <section id="ims">
     <h2>Our Focus Areas</h2>
-    <div class="card">
-      <ul>
-        <li><strong>Health & Safety</strong> – Promoting safe work design and contractor engagement.</li>
-        <li><strong>Environment</strong> – Delivering carbon-conscious outcomes across projects.</li>
-        <li><strong>Quality</strong> – Ensuring consistency, compliance, and continual improvement.</li>
-      </ul>
-    </div>
+    <p><strong>Health & Safety</strong> – Promoting safe work design and contractor engagement.</p>
+    <p><strong>Environment</strong> – Delivering carbon-conscious outcomes across projects.</p>
+    <p><strong>Quality</strong> – Ensuring consistency, compliance, and continual improvement.</p>
   </section>
 
   <footer>
