@@ -1,11 +1,10 @@
 /* --------------------------------------
    GOODMAN DIGITAL BRAND THEME
-   Typography: Founders Grotesk (fallback: Helvetica, Arial, sans-serif)
+   Typography: Archivo (Google Fonts)
    -------------------------------------- */
 
 /* === Font === */
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&display=swap'); 
-/* Substitute for Founders Grotesk — similar geometric sans for web use */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&display=swap');
 
 :root {
   /* --- Core Palette --- */
@@ -46,78 +45,6 @@ body {
   font-size: 16px;
 }
 
-/* === Layout & Sections === */
-section {
-  padding: 80px 8%;
-}
-
-section.alt-bg {
-  background-color: var(--tint-neon-green);
-}
-
-/* === Headings === */
-h1, h2, h3 {
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--ink);
-  letter-spacing: -0.02em;
-}
-
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-h2 {
-  font-size: 1.8rem;
-  margin-bottom: 0.8rem;
-  color: var(--dark-purple);
-}
-
-/* === Text === */
-p {
-  margin-bottom: 1rem;
-  color: var(--grey-ink);
-}
-
-/* === Buttons === */
-.button,
-button {
-  background-color: var(--goodman-green);
-  color: var(--white);
-  border: none;
-  border-radius: var(--radius);
-  padding: 12px 24px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.button:hover {
-  background-color: var(--neon-green);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-soft);
-}
-
-/* === Cards === */
-.card {
-  background-color: var(--white);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-soft);
-  padding: 24px;
-  transition: var(--transition);
-}
-
-.card:hover {
-  transform: translateY(-4px);
-}
-.card.security { border-top-color: #1E3A8A; } /* Dark blue */
-.card.security .card-icon {
-  background-color: rgba(30, 58, 138, 0.12); /* light blue circle */
-  color: #1E3A8A; /* dark blue icon */
-}
-.card.security .card-link { color: #1E3A8A; }
-
 /* === Navigation === */
 nav {
   background-color: var(--ink);
@@ -139,21 +66,235 @@ nav a:hover {
   color: var(--neon-green);
 }
 
-/* === Links === */
-a {
-  color: var(--dark-purple);
-  text-decoration: underline;
+/* === Hero Section === */
+.hero {
+  position: relative;
+  background: url('datacentre-hero.jpg') center center / cover no-repeat;
+  color: var(--white);
+  padding: 120px 8%;
+  text-align: center;
+  overflow: hidden;
 }
 
-a:hover {
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.35); /* overlay */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
   color: var(--neon-green);
 }
+
+.hero p {
+  font-size: 1.2rem;
+  opacity: 0.95;
+  color: var(--white);
+}
+
+/* === Sections === */
+section {
+  padding: 80px 8%;
+}
+
+section.alt-bg {
+  background-color: var(--tint-neon-green);
+}
+
+/* === Headings === */
+h1, h2, h3 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+h2 { font-size: 1.8rem; margin-bottom: 0.8rem; color: var(--dark-purple); }
+
+/* === Text === */
+p { margin-bottom: 1rem; color: var(--grey-ink); }
+
+/* === Buttons === */
+.button,
+button {
+  background-color: var(--goodman-green);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.button:hover {
+  background-color: var(--neon-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* === Cards === */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.card {
+  background-color: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  padding: 24px;
+  transition: var(--transition);
+}
+
+.card:hover { transform: translateY(-4px); }
+
+.card.safety { border-top: 5px solid var(--goodman-green); }
+.card.quality { border-top: 5px solid var(--neon-purple); }
+.card.environment { border-top: 5px solid var(--neon-green); }
+.card.security { border-top: 5px solid #1E3A8A; } /* Dark Blue Security */
+
+.card-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+
+.card.safety .card-icon { background-color: rgba(88,185,70,0.12); color: var(--goodman-green); }
+.card.quality .card-icon { background-color: rgba(110,80,255,0.12); color: var(--neon-purple); }
+.card.environment .card-icon { background-color: rgba(150,250,100,0.15); color: #78C840; }
+.card.security .card-icon { background-color: rgba(30,58,138,0.12); color: #1E3A8A; }
+
+.card h3 { font-size: 1.6rem; margin-bottom: 0.5rem; color: var(--ink); }
+.card p { font-size: 0.95rem; color: var(--grey-ink); margin-bottom: 0.5rem; line-height: 1.5; }
+
+.card-link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.card.security .card-link { color: #1E3A8A; }
+
+/* === Quick Access === */
+.quick-access {
+  background-color: var(--tint-neon-green);
+  padding: 50px 8%;
+  border-radius: var(--radius);
+}
+
+.quick-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.quick-link-item {
+  background-color: var(--white);
+  padding: 20px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: var(--transition);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.quick-link-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.quick-link-icon { font-size: 1.5rem; color: var(--goodman-green); }
+
+/* === Resources === */
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.resource-item {
+  background-color: var(--white);
+  border-radius: var(--radius);
+  padding: 20px;
+  border: 2px solid #E5E5E5;
+  transition: var(--transition);
+}
+
+.resource-item:hover { border-color: var(--goodman-green); }
+
+.resource-btn {
+  background-color: var(--goodman-green);
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.resource-btn:hover { background-color: var(--neon-green); }
 
 /* === Footer === */
 footer {
   background-color: var(--ink);
   color: var(--tint-ink);
-  padding: 2rem 8%;
+  padding: 50px 8%;
   text-align: center;
-  font-size: 0.9rem;
 }
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.footer-section h4 { color: var(--goodman-green); margin-bottom: 10px; font-size: 1rem; }
+.footer-section ul { list-style: none; padding: 0; }
+.footer-section ul li { margin-bottom: 8px; }
+.footer-section a { color: #B0B0B0; text-decoration: none; transition: var(--transition); }
+.footer-section a:hover { color: var(--goodman-green); }
+
+.footer-bottom { border-top: 1px solid #333; padding-top: 20px; font-size: 0.85rem; color: #B0B0B0; }
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  nav { flex-direction: column; gap: 1rem; }
+  .hero h1 { font-size: 2rem; }
+  .hero h2 { font-size: 1.5rem; }
+  .cards-grid, .quick-links-grid, .resources-grid { grid-template-columns: 1fr; }
+  .footer-content { grid-template-columns: 1fr; gap: 25px; }
+}
+
