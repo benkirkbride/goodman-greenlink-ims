@@ -1,677 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goodman Greenlink - IMS Portal</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --goodman-green: #58BE3C;
-            --neon-green: #C4D600;
-            --pale-green: #E8F0E4;
-            --ink: #0F1419;
-            --grey-ink: #6B7684;
-            --white: #FFFFFF;
-            --dark-purple: #332878;
-            --neon-purple: #8043D5;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-            color: var(--ink);
-            line-height: 1.6;
-            background-color: var(--white);
-        }
-
-        /* Header */
-        .header {
-            background-color: var(--goodman-green);
-            padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .logo {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--white);
-            letter-spacing: -1px;
-        }
-
-        .logo-plus {
-            width: 40px;
-            height: 40px;
-            position: relative;
-        }
-
-        .logo-plus::before,
-        .logo-plus::after {
-            content: '';
-            position: absolute;
-            background-color: var(--goodman-green);
-        }
-
-        .logo-plus::before {
-            width: 40px;
-            height: 8px;
-            top: 16px;
-            left: 0;
-        }
-
-        .logo-plus::after {
-            width: 8px;
-            height: 40px;
-            left: 16px;
-            top: 0;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.3s;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--goodman-green) 0%, #4AAA30 100%);
-            color: var(--white);
-            padding: 80px 40px;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .hero p {
-            font-size: 20px;
-            opacity: 0.95;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 60px 40px;
-        }
-
-        .section-title {
-            font-size: 36px;
-            color: var(--ink);
-            margin-bottom: 40px;
-            text-align: center;
-            font-weight: 700;
-        }
-
-        /* Cards Grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        .card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 5px solid var(--goodman-green);
-            cursor: pointer;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-        }
-
-        .card.safety {
-            border-top-color: var(--goodman-green);
-        }
-
-        .card.quality {
-            border-top-color: var(--neon-purple);
-        }
-
-        .card.environment {
-            border-top-color: var(--neon-green);
-        }
-
-        .card-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-            font-size: 32px;
-        }
-
-        .card.safety .card-icon {
-            background-color: rgba(88, 190, 60, 0.1);
-            color: var(--goodman-green);
-        }
-
-        .card.quality .card-icon {
-            background-color: rgba(128, 67, 213, 0.1);
-            color: var(--neon-purple);
-        }
-
-        .card.environment .card-icon {
-            background-color: rgba(196, 214, 0, 0.1);
-            color: #9DAD00;
-        }
-
-        .card h3 {
-            font-size: 26px;
-            margin-bottom: 15px;
-            color: var(--ink);
-            font-weight: 700;
-        }
-
-        .card p {
-            color: var(--grey-ink);
-            font-size: 16px;
-            margin-bottom: 20px;
-            line-height: 1.7;
-        }
-
-        .card-links {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .card-link {
-            color: var(--goodman-green);
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: gap 0.3s;
-        }
-
-        .card-link:hover {
-            gap: 12px;
-        }
-
-        .card.quality .card-link {
-            color: var(--neon-purple);
-        }
-
-        .card.environment .card-link {
-            color: #9DAD00;
-        }
-
-        /* Quick Access Section */
-        .quick-access {
-            background-color: var(--pale-green);
-            padding: 50px 40px;
-            margin: 60px 0;
-            border-radius: 12px;
-        }
-
-        .quick-access h2 {
-            font-size: 32px;
-            margin-bottom: 30px;
-            color: var(--ink);
-            font-weight: 700;
-        }
-
-        .quick-links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .quick-link-item {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--ink);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .quick-link-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .quick-link-icon {
-            font-size: 24px;
-            color: var(--goodman-green);
-        }
-
-        .quick-link-text {
-            font-weight: 600;
-        }
-
-        /* Resources Section */
-        .resources-section {
-            margin-top: 60px;
-        }
-
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .resource-item {
-            background: var(--white);
-            border: 2px solid #E5E5E5;
-            border-radius: 8px;
-            padding: 30px;
-            transition: border-color 0.3s;
-        }
-
-        .resource-item:hover {
-            border-color: var(--goodman-green);
-        }
-
-        .resource-item h4 {
-            color: var(--ink);
-            font-size: 20px;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .resource-item p {
-            color: var(--grey-ink);
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        .resource-btn {
-            background-color: var(--goodman-green);
-            color: var(--white);
-            padding: 10px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: 600;
-            transition: background-color 0.3s;
-        }
-
-        .resource-btn:hover {
-            background-color: #4AAA30;
-        }
-
-        /* Footer */
-        .footer {
-            background-color: var(--ink);
-            color: var(--white);
-            padding: 50px 40px 30px;
-            margin-top: 80px;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 30px;
-        }
-
-        .footer-section h4 {
-            color: var(--goodman-green);
-            margin-bottom: 15px;
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-section a {
-            color: #B0B0B0;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: var(--goodman-green);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #333;
-            color: #B0B0B0;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .nav-links {
-                flex-direction: column;
-                text-align: center;
-                gap: 15px;
-            }
-
-            .hero h1 {
-                font-size: 32px;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 28px;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .card, .quick-link-item, .resource-item {
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        .card:nth-child(2) {
-            animation-delay: 0.1s;
-        }
-
-        .card:nth-child(3) {
-            animation-delay: 0.2s;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Goodman Greenlink IMS</title>
+
+  <!-- Founders Grotesk is not web-hosted, so Archivo serves as a close digital substitute -->
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* -------------------------------
+       GOODMAN DIGITAL STYLE THEME
+       Typography: Founders Grotesk (Archivo substitute)
+    --------------------------------*/
+
+    :root {
+      /* --- Core Palette --- */
+      --goodman-green: #58B946;
+      --pale-green: #E5FED8;
+      --neon-green: #96FA64;
+      --tint-neon-green: #F1FEEB;
+      --ink: #140C39;
+      --grey-ink: #4F486A;
+      --tint-ink: #F1F1F3;
+      --dark-purple: #412E9C;
+      --neon-purple: #6E50FF;
+      --pale-purple: #DBD3FF;
+      --tint-neon-purple: #F5F4FF;
+      --white: #FFFFFF;
+
+      /* --- Spacing + Shadow --- */
+      --radius: 12px;
+      --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --transition: all 0.25s ease-in-out;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Archivo', Helvetica, Arial, sans-serif;
+      background-color: var(--white);
+      color: var(--ink);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* --- Navigation --- */
+    nav {
+      background-color: var(--ink);
+      color: var(--white);
+      padding: 1rem 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    nav a:hover {
+      color: var(--neon-green);
+    }
+
+    /* --- Hero Section --- */
+    header.hero {
+      background: var(--pale-green);
+      padding: 100px 8%;
+      text-align: center;
+    }
+
+    header.hero h1 {
+      font-size: 3rem;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+
+    header.hero p {
+      font-size: 1.2rem;
+      color: var(--grey-ink);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    .button {
+      background-color: var(--goodman-green);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius);
+      padding: 12px 28px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .button:hover {
+      background-color: var(--neon-green);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* --- Content Sections --- */
+    section {
+      padding: 80px 8%;
+    }
+
+    section.alt-bg {
+      background-color: var(--tint-neon-green);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--dark-purple);
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: var(--grey-ink);
+      margin-bottom: 1rem;
+    }
+
+    .card {
+      background-color: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      padding: 24px;
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* --- Footer --- */
+    footer {
+      background-color: var(--ink);
+      color: var(--tint-ink);
+      padding: 2rem 8%;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="logo-section">
-                <div class="logo">Goodman</div>
-            </div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#safety">Safety</a></li>
-                    <li><a href="#quality">Quality</a></li>
-                    <li><a href="#environment">Environment</a></li>
-                    <li><a href="#resources">Resources</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Greenlink - Integrated Management System</h1>
-            <p>Your comprehensive portal for Safety, Quality, and Environmental management. Building sustainable data centre excellence through integrated systems.</p>
-        </div>
-    </section>
+  <nav>
+    <div class="logo">Goodman</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#ims">IMS</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
 
-    <!-- Main Content -->
-    <main class="container">
-        <h2 class="section-title">Management Systems</h2>
-        
-        <!-- Main Cards -->
-        <div class="cards-grid">
-            <!-- Safety Card -->
-            <div class="card safety" id="safety">
-                <div class="card-icon">🛡️</div>
-                <h3>Work Health & Safety</h3>
-                <p>Access comprehensive safety management plans, risk assessments, and incident reporting systems for all data centre projects.</p>
-                <div class="card-links">
-                    <a href="#" class="card-link">→ WHS Management Plans</a>
-                    <a href="#" class="card-link">→ Safety in Design</a>
-                    <a href="#" class="card-link">→ Incident Reporting</a>
-                    <a href="#" class="card-link">→ Risk Assessments</a>
-                    <a href="#" class="card-link">→ Contractor Management</a>
-                </div>
-            </div>
+  <header class="hero" id="home">
+    <h1>Goodman Greenlink IMS</h1>
+    <p>Driving sustainable, safe and efficient delivery across Goodman’s global network through a connected management system.</p>
+    <button class="button">Explore System</button>
+  </header>
 
-            <!-- Quality Card -->
-            <div class="card quality" id="quality">
-                <div class="card-icon">✓</div>
-                <h3>Quality Management</h3>
-                <p>Maintain excellence through quality assurance frameworks, inspection schedules, and compliance verification processes.</p>
-                <div class="card-links">
-                    <a href="#" class="card-link">→ Quality Management Plans</a>
-                    <a href="#" class="card-link">→ Inspection & Testing</a>
-                    <a href="#" class="card-link">→ Non-Conformance Reports</a>
-                    <a href="#" class="card-link">→ Document Control</a>
-                    <a href="#" class="card-link">→ Audit Schedules</a>
-                </div>
-            </div>
+  <section id="about">
+    <h2>About the Greenlink IMS</h2>
+    <div class="card">
+      <p>The Goodman Greenlink Integrated Management System (IMS) provides a framework to support health, safety, environmental, and quality excellence across our developments, operations and partnerships.</p>
+      <p>It is designed to align with international standards, ensure continual improvement, and support our commitment to sustainable performance.</p>
+    </div>
+  </section>
 
-            <!-- Environment Card -->
-            <div class="card environment" id="environment">
-                <div class="card-icon">🌱</div>
-                <h3>Environmental Management</h3>
-                <p>Monitor environmental performance, sustainability initiatives, and compliance with environmental regulations across all sites.</p>
-                <div class="card-links">
-                    <a href="#" class="card-link">→ Environmental Plans</a>
-                    <a href="#" class="card-link">→ Sustainability Metrics</a>
-                    <a href="#" class="card-link">→ Waste Management</a>
-                    <a href="#" class="card-link">→ Energy Monitoring</a>
-                    <a href="#" class="card-link">→ Environmental Incidents</a>
-                </div>
-            </div>
-        </div>
+  <section id="ims" class="alt-bg">
+    <h2>Our Focus Areas</h2>
+    <div class="card">
+      <ul>
+        <li><strong>Health & Safety</strong> – Promoting safe work design and contractor engagement.</li>
+        <li><strong>Environment</strong> – Delivering carbon-conscious outcomes across projects.</li>
+        <li><strong>Quality</strong> – Ensuring consistency, compliance, and continual improvement.</li>
+      </ul>
+    </div>
+  </section>
 
-        <!-- Quick Access Section -->
-        <div class="quick-access">
-            <h2>Quick Access</h2>
-            <div class="quick-links-grid">
-                <a href="#" class="quick-link-item">
-                    <span class="quick-link-icon">📋</span>
-                    <span class="quick-link-text">Daily Reports</span>
-                </a>
-                <a href="#" class="quick-link-item">
-                    <span class="quick-link-icon">📊</span>
-                    <span class="quick-link-text">Dashboard & KPIs</span>
-                </a>
-                <a href="#" class="quick-link-item">
-                    <span class="quick-link-icon">📖</span>
-                    <span class="quick-link-text">Procedures & SOPs</span>
-                </a>
-                <a href="#" class="quick-link-item">
-                    <span class="quick-link-icon">🎓</span>
-                    <span class="quick-link-text">Training Portal</span>
-                </a>
-                <a href="#" class="quick-link-item">
-                    <span class="quick-link-icon">📁</span>
-                    <span class="quick-link-text">Document Library</span>
-                </a>
-                <a href="#" class="quick-link-item">
-                    <span class="quick-link-icon">👥</span>
-                    <span class="quick-link-text">Emergency Contacts</span>
-                </a>
-                <a href="#" class="quick-link-item">
-                    <span class="quick-link-icon">⚙️</span>
-                    <span class="quick-link-text">System Settings</span>
-                </a>
-                <a href="#" class="quick-link-item">
-                    <span class="quick-link-icon">💬</span>
-                    <span class="quick-link-text">Support & Feedback</span>
-                </a>
-            </div>
-        </div>
+  <footer>
+    © 2025 Goodman Group. All rights reserved.
+  </footer>
 
-        <!-- Resources Section -->
-        <div class="resources-section" id="resources">
-            <h2 class="section-title">Resources & Documents</h2>
-            <div class="resources-grid">
-                <div class="resource-item">
-                    <h4>Legislative Requirements</h4>
-                    <p>Access current Australian WHS legislation, environmental regulations, and compliance guidelines.</p>
-                    <a href="#" class="resource-btn">View Documents</a>
-                </div>
-                <div class="resource-item">
-                    <h4>Standards & Guidelines</h4>
-                    <p>Industry standards, best practice guidelines, and Goodman-specific requirements for data centres.</p>
-                    <a href="#" class="resource-btn">View Standards</a>
-                </div>
-                <div class="resource-item">
-                    <h4>Forms & Templates</h4>
-                    <p>Download editable forms, checklists, and templates for site documentation and reporting.</p>
-                    <a href="#" class="resource-btn">Browse Templates</a>
-                </div>
-                <div class="resource-item">
-                    <h4>Training Materials</h4>
-                    <p>Access induction materials, toolbox talks, and competency assessment resources.</p>
-                    <a href="#" class="resource-btn">View Materials</a>
-                </div>
-                <div class="resource-item">
-                    <h4>Project Documentation</h4>
-                    <p>Project-specific HSEQ plans, risk assessments, and interface management documents.</p>
-                    <a href="#" class="resource-btn">Access Projects</a>
-                </div>
-                <div class="resource-item">
-                    <h4>Audit & Inspection</h4>
-                    <p>Audit schedules, inspection checklists, and verification tools for compliance monitoring.</p>
-                    <a href="#" class="resource-btn">View Tools</a>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>About Goodman</h4>
-                <ul>
-                    <li><a href="#">Company Overview</a></li>
-                    <li><a href="#">Our Projects</a></li>
-                    <li><a href="#">Sustainability</a></li>
-                    <li><a href="#">Careers</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>HSEQ Systems</h4>
-                <ul>
-                    <li><a href="#">Safety Management</a></li>
-                    <li><a href="#">Quality Assurance</a></li>
-                    <li><a href="#">Environmental</a></li>
-                    <li><a href="#">Compliance</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#">Help Centre</a></li>
-                    <li><a href="#">Contact HSEQ Team</a></li>
-                    <li><a href="#">System Updates</a></li>
-                    <li><a href="#">Feedback</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="#">Document Library</a></li>
-                    <li><a href="#">Training Portal</a></li>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Legislative Updates</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Goodman Group. All rights reserved. | Greenlink Integrated Management System</p>
-        </div>
-    </footer>
-
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add active state to cards on click
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', function() {
-                // Remove active class from all cards
-                document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-                // Add active class to clicked card
-                this.classList.add('active');
-            });
-        });
-    </script>
 </body>
 </html>
