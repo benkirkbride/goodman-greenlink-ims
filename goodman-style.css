@@ -68,14 +68,20 @@ nav a:hover {
 
 /* === Hero Section === */
 .hero {
-  position: relative;
-  background: url('datacentre-hero.jpg') center center / cover no-repeat;
-  color: var(--white);
-  padding: 120px 8%;
-  text-align: center;
-  overflow: hidden;
+    position: relative;
+    background-image: linear-gradient(rgba(20,12,57,0.55), rgba(20,12,57,0.55)), url('datacentre-hero.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* optional parallax */
+    color: var(--white);
+    padding: 120px 8%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
 }
-
 .hero::before {
   content: "";
   position: absolute;
