@@ -4,50 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Goodman Greenlink - IMS Portal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <img src="Goodman-Logo.png" alt="Goodman Logo">
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#safety">Safety</a></li>
+          <li><a href="#quality">Quality</a></li>
+          <li><a href="#environment">Environment</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#resources">Resources</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-  <style>
-    :root {
-      --goodman-green: #58B946;
-      --neon-green: #96FA64;
-      --pale-green: #E5FED8;
-      --ink: #140C39;
-      --grey-ink: #4F486A;
-      --white: #FFFFFF;
-      --dark-purple: #412E9C;
-      --neon-purple: #6E50FF;
-    }
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1><span class="highlight">Greenlink</span></h1>
+      <h2><span class="highlight">Integrated Management System</span></h2>
+      <p>The Goodman Greenlink IMS drives safe, sustainable, and high-quality outcomes across our global data centre network through a connected management framework.</p>
+    </div>
+  </section>
 
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: 'Archivo', sans-serif; background-color: var(--white); color: var(--ink); line-height: 1.6; }
-
-    /* Header */
-    .header { background-color: var(--ink); padding: 20px 8%; display:flex; justify-content:space-between; align-items:center; }
-    .header img { height: 62px; }
-    nav a { color: var(--white); text-decoration:none; margin-left: 20px; font-weight:500; transition:0.3s; }
-    nav a:hover { color: var(--neon-green); }
-
-    /* Hero Section */
-    .hero {
-      position: relative;
-      background-image: linear-gradient(rgba(20,12,57,0.55), rgba(20,12,57,0.55)), url(datacentre-hero.jpg);
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      color: var(--white);
-      padding: 120px 8%;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 400px;
-    }
-
-    .hero h1 { font-size: 3rem; margin-bottom: 0.5rem; }
-    .hero h2 { font-size: 2rem; margin-bottom: 1rem; }
-    .hero p { font-size: 1.2rem; max-width:700px; margin: 0 auto; }
 
     /* Cards */
     .cards-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 60px 8%; }
